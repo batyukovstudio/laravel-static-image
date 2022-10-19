@@ -1,0 +1,14 @@
+{
+    "screens": {
+        "xs": 320,
+        "sm": 640,
+        "md": 768,
+        "lg": 1024,
+        "xl": 1280,
+        "xxl": 1536
+    },
+    "pageFolder": "src",
+    "quality": 80,
+    "prefix": "_batwebp_",
+    "exception": "node_modules"
+}
