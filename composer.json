@@ -6,7 +6,10 @@
   "autoload": {
     "psr-4": {
       "Batyukovstudio\\LaravelStaticImage\\": "src/"
-    }
+    },
+    "files": [
+      "helpers.php"
+    ]
   },
   "extra": {
     "laravel": {
@@ -22,7 +25,7 @@
     }
   ],
   "require": {
-    "php": ">=7.*"
+    "php": ">=7"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
