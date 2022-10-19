@@ -1,0 +1,20 @@
+{
+  "name": "batyukovstudio/laravel-static-image",
+  "license": "MIT",
+  "homepage": "https://github.com/batyukovstudio/laravel-static-image",
+  "autoload": {
+    "psr-4": {
+      "Batyukovstudio\\LaravelStaticImage\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "MerkulovKA",
+      "email": "kirill_tagil9@mail.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "laravel/framework": ">=7.*"
+  }
+}
