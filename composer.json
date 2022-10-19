@@ -1,5 +1,6 @@
 {
   "name": "batyukovstudio/laravel-static-image",
+  "description": "",
   "license": "MIT",
   "homepage": "https://github.com/batyukovstudio/laravel-static-image",
   "autoload": {
