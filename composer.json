@@ -7,6 +7,13 @@
       "Batyukovstudio\\LaravelStaticImage\\": "src/"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Batyukovstudio\\LaravelStatucImage\\PasswordServiceProvider"
+      ]
+    }
+  },
   "authors": [
     {
       "name": "MerkulovKA",
