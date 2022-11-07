@@ -1,0 +1,18 @@
+{
+    "screens": {
+        "xs": 320,
+        "sm": 640,
+        "md": 768,
+        "lg": 1024,
+        "xl": 1280,
+        "xxl": 1536
+    },
+    "quality": 80,
+    "format": ["avif", "webp"],
+    "prefix": "_ebs_",
+    "pageFolder": ["src"],
+    "sourceFolder": "src",
+    "searchExcludes": ["node_modules"],
+    "checkWarning": false,
+    "checkProgress": false
+}

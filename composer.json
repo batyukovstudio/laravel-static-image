@@ -25,8 +25,16 @@
     }
   ],
   "require": {
-    "php": ">=7"
+    "laravel/framework": ">=8",
+    "php": ">=8",
+    "batyukovstudio/laravel-image-object": "dev-main"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:batyukovstudio/laravel-image-object.git"
+    }
+  ],
   "minimum-stability": "dev",
   "prefer-stable": true
 }
