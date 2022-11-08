@@ -1,7 +1,10 @@
 // Объявление дефолтных переменных
 import fs from 'fs'
-import { exit } from 'process'
-const CONFIG_NAME_FILE = 'ebs.config.json'
+import {exit} from 'process'
+
+const CONFIG_NAME_FILE = 'conversion-config.json'
+const VIEW_NAME = 'x-static-image';
+
 let SEARCH_EXCLUDES = 'node_modules'
 let PAGES_FOLDER = 'resources/views'
 let PREFIX = '_ebs_'
@@ -10,6 +13,7 @@ let FORMAT = 'webp'
 let QUALITY = 80
 let CHECK_WARNING = true
 let CHECK_PROGRESS = true
+
 let SCREENS = {
     xs: 320,
     sm: 640,
@@ -94,4 +98,5 @@ export {
     QUALITY,
     CHECK_WARNING,
     CHECK_PROGRESS,
+    VIEW_NAME,
 }

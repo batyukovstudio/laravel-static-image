@@ -5,8 +5,8 @@
     "main": "_ebs_convertor.js",
     "type": "module",
     "scripts": {
-        "gen": "node _ebs_convertor.js",
-        "clear": "node _ebs_delete.js",
+        "image:gen": "node _ebs_convertor.js",
+        "image:delete": "node _ebs_delete.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "MerkulovKA <merkulov@batyukovstudio.com>",

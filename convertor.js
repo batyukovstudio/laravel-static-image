@@ -1,8 +1,8 @@
 // Подключение зависимостей
 import fs from 'fs'
 import path from 'path'
-import { exit } from 'process'
-import { JSDOM } from 'jsdom'
+import {exit} from 'process'
+import {JSDOM} from 'jsdom'
 import sharp from 'sharp'
 
 import {
@@ -15,10 +15,12 @@ import {
     QUALITY,
     CHECK_WARNING,
     CHECK_PROGRESS,
+    VIEW_NAME,
 } from './scripts/constant.js'
 
 let IMAGES = []
 let count = 0
+
 function searchImageInCode(dir) {
     fs.readdirSync(dir).forEach((item) => {
         item = `${dir}/${item}`
@@ -28,9 +30,9 @@ function searchImageInCode(dir) {
         } else {
             if (item.endsWith('.blade.php')) {
                 const text = fs.readFileSync(item, 'utf8')
-                if (text.includes('x-image')) {
+                if (text.includes(VIEW_NAME)) {
                     const code = new JSDOM(text)
-                    code.window.document.querySelectorAll('x-image').forEach((image) => {
+                    code.window.document.querySelectorAll(VIEW_NAME).forEach((image) => {
                         image.setAttribute('path', item)
                         IMAGES.push(image)
                     })
@@ -54,7 +56,7 @@ function init() {
         })
         console.log(`Сгенерировано ${count} файл(ов)`)
     } else {
-        console.log('В коде не было найдено ниодного тега "<x-image>"')
+        console.log('В коде не было найдено ниодного тега "<' + VIEW_NAME + '>"')
     }
 }
 
@@ -64,9 +66,9 @@ function analysisImage(image) {
     let quality = Number(image.getAttribute('quality')) || QUALITY || 80
     let sizes = image.getAttribute('sizes')
         ? image
-              .getAttribute('sizes')
-              .replace(/[a-zа-яё:]/gi, '')
-              .split(' ')
+            .getAttribute('sizes')
+            .replace(/[a-zа-яё:]/gi, '')
+            .split(' ')
         : null
 
     if (CHECK_WARNING) {
@@ -80,6 +82,7 @@ function analysisImage(image) {
         generateImage(src, quality, format)
     }
 }
+
 function checkingWarning(image) {
     if (!image.getAttribute('alt')) {
         console.log(
@@ -110,7 +113,7 @@ function generateImage(src, quality, format, size = null) {
     const pathname = path.dirname(src) + '/'
     if (format.includes('webp')) {
         count++
-        const _sharp = sharp(`${SOURCE_FOLDER}${src}`).webp({ quality: quality })
+        const _sharp = sharp(`${SOURCE_FOLDER}${src}`).webp({quality: quality})
         if (size) {
             _sharp.resize({
                 width: size,
@@ -121,7 +124,7 @@ function generateImage(src, quality, format, size = null) {
     }
     if (format.includes('avif')) {
         count++
-        const _sharp = sharp(`${SOURCE_FOLDER}${src}`).avif({ quality: quality })
+        const _sharp = sharp(`${SOURCE_FOLDER}${src}`).avif({quality: quality})
         if (size) {
             _sharp.resize({
                 width: size,
@@ -131,4 +134,5 @@ function generateImage(src, quality, format, size = null) {
         _sharp.toFile(`${SOURCE_FOLDER}${pathname}${PREFIX}${filename}${size !== null ? '_' + size : ''}.avif`)
     }
 }
+
 init()
