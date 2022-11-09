@@ -1,15 +1,55 @@
 # Laravel-Static-Image
 
-`x-image` - является отличной заменой стандартного тега `img`, использовав который хотя бы раз, вы больше никогда не
+`x-static-image` - является отличной заменой стандартного тега `img`, использовав который хотя бы раз, вы больше никогда не
 захотите возвращаться к стандартному тегу
 
 ## Установка
 
-Для использования этого "пакета" в вашем проекте необходимо скопировать содержимое папки `src` в корень вашего проекта
+`Тут в будущем какая то команда для установки`
+
+Добавить в `composer.json`:
+
+```json
+"require": {
+  "batyukovstudio/laravel-static-image": "dev-main"
+}
+```
+
+```json
+"repositories": [
+{
+"type": "vcs",
+"url": "git@github.com:batyukovstudio/laravel-static-image.git"
+},
+{
+"type": "vcs",
+"url": "git@github.com:batyukovstudio/laravel-image-object.git"
+}
+],
+```
+
+Добавить в `package.json`:
+
+```json
+{
+  "static-image:generate": "node vendor/batyukovstudio/laravel-static-image/convertor.js --config=node_modules/laravel-mix/setup/webpack.config.js",
+  "static-image:clear": "node vendor/batyukovstudio/laravel-static-image/delete.js --config=node_modules/laravel-mix/setup/webpack.config.js",
+}
+```
+Если вам необходимо отредактировать конфиги, или  изменить static-image.blade:
+
+`php artisan vendor:publish --tag="laravel-static-image"`
+
 
 ## Конфигурация
 
-Чтобы настроить модуль изображения и настроить его поведение, вы можете использовать файл `batwebp.config.json`
+Для генерации конверсий для изображений, воспользуйтесь командами:
+`php artisan laravel-static-image:generate-conversions`, или `npm run static-image:generate`
+
+Для удаления конверсий для изображений, воспользуйтесь командами:
+`php artisan laravel-static-image:delete-conversions`, или `npm run static-image:clear`
+
+Чтобы настроить модуль изображения и настроить его поведение, вы можете использовать файл `conversion-config.json`
 > Все значения в примерах являются дефолтными
 
 ### Размеры экрана (screens)
@@ -51,7 +91,7 @@
 
 ```json
 {
-  "prefix": "_ebs_"
+  "prefix": "conversions_"
 }
 ```
 
@@ -142,15 +182,17 @@
 
 ## Использование
 
-`x-image` выводит стандартный тег `picture`
+`x-static-image` выводит стандартный тег `picture`
 
 ```html
-<x-image src="/batyukovstudio-logotype.png"/>
+
+<x-static-image src="/batyukovstudio-logotype.png"/>
 ```
 
 Конечным результатом будет:
 
 ```html
+
 <picture>
     <source srcset="/batyukovstudio-logotype.webp" type="image/webp">
     <img src="/batyukovstudio-logotype.png">
@@ -168,7 +210,8 @@
 Пример:
 
 ```html
-<x-image src="/batyukovstudio-logotype.png"/>
+
+<x-static-image src="/batyukovstudio-logotype.png"/>
 ```
 
 ### `width` / `height`
@@ -179,7 +222,8 @@
 Пример:
 
 ```html
-<x-image src="..." width="640" height="320"/>
+
+<x-static-image src="..." width="640" height="320"/>
 ```
 
 ### `sizes`
@@ -190,12 +234,14 @@
 Пример:
 
 ```html
-<x-image src="/batyukovstudio-logotype.png" sizes="400 xl:1000"/>
+
+<x-static-image src="/batyukovstudio-logotype.png" sizes="400 xl:1000"/>
 ```
 
 Резульатом будет:
 
 ```html
+
 <picture>
     <source type="image/webp"
             srcset="/_ebs_batyukovstudio-logotype_1000.webp"
@@ -213,10 +259,11 @@
 Пример:
 
 ```html
-<x-image src="/batyukovstudio-logotype.png" quality="70"/>
+
+<x-static-image src="/batyukovstudio-logotype.png" quality="70"/>
 ```
 
-Не указав значение на теге `x-image`, значение качества будет браться из файла конфигурации `batwebp.config.json`, если
+Не указав значение на теге `x-static-image`, значение качества будет браться из файла конфигурации `batwebp.config.json`, если
 в файле также не указано качество, то будет взято стандартное значение `80`
 
 ### `lazy`
@@ -226,12 +273,14 @@
 Пример:
 
 ```html
-<x-image src="/batyukovstudio-logotype.png" lazy/>
+
+<x-static-image src="/batyukovstudio-logotype.png" lazy/>
 ```
 
 Результат:
 
 ```html
+
 <picture>
     <source srcset="/batyukovstudio-logotype.webp" type="image/webp">
     <img src="/batyukovstudio-logotype.png" loading="lazy">

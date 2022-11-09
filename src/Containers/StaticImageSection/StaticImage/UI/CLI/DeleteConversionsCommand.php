@@ -36,6 +36,9 @@ class DeleteConversionsCommand extends Command
      */
     public function handle()
     {
-        return exec('npm run image:delete');
+        $result = exec('npm run static-image:clear', $output);
+        foreach ($output as $item) {
+            print_r($item . PHP_EOL);
+        }
     }
 }
