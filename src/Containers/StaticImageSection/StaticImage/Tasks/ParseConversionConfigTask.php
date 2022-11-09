@@ -9,7 +9,7 @@ use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\
 class ParseConversionConfigTask
 {
 
-    public function run(): LaravelStaticImage
+    public function run(): array
     {
         $data = file_get_contents(base_path('conversion-config.json'));
 

@@ -23,7 +23,7 @@ class DefineConversionsConfigAction
 
             $configData = app(CheckConfigDefaultValuesTask::class)->run($configData);
 
-            if ($config['cache.should_cache']) {
+            if ($config['cache']['should_config_cache']) {
                 Cache::put($cacheName, $configData);
             }
         }

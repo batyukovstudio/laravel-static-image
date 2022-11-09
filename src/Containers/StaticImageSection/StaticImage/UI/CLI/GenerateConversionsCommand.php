@@ -36,6 +36,6 @@ class GenerateConversionsCommand extends Command
      */
     public function handle()
     {
-        return exec('npm run image:gen');
+        return exec('node ' . base_path('/vendor/batyukovstudio/laravel-static-image/convertor.js'));
     }
 }

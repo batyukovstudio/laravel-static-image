@@ -1,12 +1,12 @@
 {
-    "name": "ebsImage",
+    "name": "laravel-static-image",
     "version": "1.0.0",
-    "description": "image to webp and avif",
-    "main": "_ebs_convertor.js",
+    "description": "images to webp and avif",
+    "main": "convertor.js",
     "type": "module",
     "scripts": {
-        "image:gen": "node _ebs_convertor.js",
-        "image:delete": "node _ebs_delete.js",
+        "image:gen": "node convertor.js",
+        "image:delete": "node delete.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "MerkulovKA <merkulov@batyukovstudio.com>",

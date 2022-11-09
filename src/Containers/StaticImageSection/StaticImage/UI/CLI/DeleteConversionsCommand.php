@@ -11,7 +11,7 @@ class DeleteConversionsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'laravel-static-image:generate-conversions';
+    protected $signature = 'laravel-static-image:delete-conversions';
 
     /**
      * The console command description.

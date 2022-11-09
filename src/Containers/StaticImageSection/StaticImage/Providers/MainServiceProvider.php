@@ -17,10 +17,13 @@ class MainServiceProvider extends ServiceProvider
 
     public function boot()
     {
+
+        $this->loadViewsFrom(__DIR__ . '/../../../../resources/components', 'laravel-static-image');
+
         Blade::component('static-image', StaticImage::class);
 
         $this->app->singleton(LaravelStaticImage::class, LaravelStaticImageProcessor::class);
-
+        
         $this->app->booted(function (Application $app) {
 
             if (true === $app['config']['laravel-static-image']['always_generate']) {

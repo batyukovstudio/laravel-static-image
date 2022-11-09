@@ -14,32 +14,24 @@ use Illuminate\View\Component;
 class StaticImage extends Component
 {
 
-    private array $screens;
-    private array $formats;
-    private string $prefix;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        public string $src,
+        public string $alt = '',
+        public ?string $sizes = null,
+        public ?int $width = null,
+        public ?int $height = null,
+        public string $class = '',
+        public bool $lazy = false,
+    )
     {
-        $this->screens = laravel_static_image()->getScreens();
-
-        $this->formats = laravel_static_image()->getFormats();
-
-        $this->prefix = laravel_static_image()->getPrefix();
     }
 
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    private function getAttribute(string $name): mixed
-    {
-        return $this->attributes[$name] ?? null;
-    }
 
     /**
      * @param string $sizes
@@ -53,14 +45,14 @@ class StaticImage extends Component
 
     private function prepareValue(array $sizes, string $fileName, string $folder): ImageValue
     {
-        $prefix = $this->prefix;
-        $formats = $this->formats;
+        $prefix = laravel_static_image()->getPrefix();
+        $formats = laravel_static_image()->getFormats();
 
         $imageValue = ImageValue::run()
             ->setAlt($fileName)
             ->setWithGallery(false);
 
-        $transformer = new ImageFormatsTransformer($sizes,$prefix, $folder, $fileName);
+        $transformer = new ImageFormatsTransformer($sizes, $prefix, $folder, $fileName);
         $conversionsCollection = ImageConversionsCollection::run($formats, $transformer);
 
         $imageValue->setImageConversionsCollection($conversionsCollection);
@@ -74,20 +66,20 @@ class StaticImage extends Component
      */
     public function render()
     {
+        $src = $this->src;
 
+        $sizes = $this->sizes ?? laravel_static_image()->getScreens();
 
-        $src = $this->getAttribute('src');
-
-        $sizes = $this->getAttribute('sizes') ?? [];
-        $sizes = $this->prepareSizes($sizes);
-
+        if (is_string($sizes)) {
+            $sizes = $this->prepareSizes($sizes);
+        }
 
         $fileName = basename($src);
         $folder = dirname($src) . '/';
 
-
         $image = $this->prepareValue($sizes, $fileName, $folder);
 
-        return view('image', compact('image'));
+
+        return view('laravel-static-image::static-image', compact('image'));
     }
 }

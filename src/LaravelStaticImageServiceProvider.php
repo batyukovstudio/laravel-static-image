@@ -3,6 +3,8 @@
 namespace Batyukovstudio\LaravelStaticImage;
 
 use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Providers\MainServiceProvider;
+use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\UI\CLI\DeleteConversionsCommand;
+use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\UI\CLI\GenerateConversionsCommand;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelStaticImageServiceProvider extends ServiceProvider
@@ -21,11 +23,17 @@ class LaravelStaticImageServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/Containers/StaticImageSection/StaticImage/Config/staticImageSection-staticImage.php' => config_path('laravel-static-image.php'),
-            __DIR__ . '/resources/components/image.blade.php' => resource_path('components/image.blade.php')
+            __DIR__ . '/resources/components/static-image.blade.php' => resource_path('components/image.blade.php')
         ], 'laravel-static-image');
 
-        $this->mergeConfigFrom(__DIR__ . '/Containers/StaticImageSection/StaticImage/Config/staticImageSection-staticImage.php','laravel-static-image');
+        $this->mergeConfigFrom(__DIR__ . '/Containers/StaticImageSection/StaticImage/Config/staticImageSection-staticImage.php', 'laravel-static-image');
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                GenerateConversionsCommand::class,
+                DeleteConversionsCommand::class,
+            ]);
+        }
     }
 
 }
