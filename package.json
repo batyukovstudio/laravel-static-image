@@ -5,8 +5,8 @@
     "main": "convertor.js",
     "type": "module",
     "scripts": {
-        "image:gen": "node convertor.js",
-        "image:delete": "node delete.js",
+        "static-image:generate": "node convertor.js",
+        "static-image:clear": "node delete.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "MerkulovKA <merkulov@batyukovstudio.com>",

@@ -8,7 +8,7 @@
         "xxl": 1536
     },
     "quality": 80,
-    "format": [ "webp"],
+    "format": ["webp"],
     "prefix": "conversion_",
     "pageFolder": ["resources"],
     "sourceFolder": "public",
