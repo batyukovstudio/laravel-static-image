@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Actions;
+namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Tasks;
 
 
 use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Interfaces\LaravelStaticImage;

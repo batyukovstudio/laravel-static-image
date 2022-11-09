@@ -1,6 +1,6 @@
 <?php
 
-namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Commands;
+namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\UI\CLI;
 
 use Illuminate\Console\Command;
 
