@@ -1,7 +1,7 @@
 # Laravel-Static-Image
 
-`x-static-image` - является отличной заменой стандартного тега `img`, использовав который хотя бы раз, вы больше никогда не
-захотите возвращаться к стандартному тегу
+`x-static-image` - является отличной заменой стандартного тега `img`, использовав который хотя бы раз, вы больше никогда
+не захотите возвращаться к стандартному тегу
 
 ## Установка
 
@@ -10,21 +10,21 @@
 Добавить в `composer.json`:
 
 ```json
-"require": {
-  "batyukovstudio/laravel-static-image": "dev-main"
+"require":{
+    "batyukovstudio/laravel-static-image": "dev-main"
 }
 ```
 
 ```json
 "repositories": [
-{
-"type": "vcs",
-"url": "git@github.com:batyukovstudio/laravel-static-image.git"
-},
-{
-"type": "vcs",
-"url": "git@github.com:batyukovstudio/laravel-image-object.git"
-}
+    {
+    "type": "vcs",
+    "url": "git@github.com:batyukovstudio/laravel-static-image.git"
+    },
+    {
+    "type": "vcs",
+    "url": "git@github.com:batyukovstudio/laravel-image-object.git"
+    }
 ],
 ```
 
@@ -33,13 +33,13 @@
 ```json
 {
   "static-image:generate": "node vendor/batyukovstudio/laravel-static-image/convertor.js --config=node_modules/laravel-mix/setup/webpack.config.js",
-  "static-image:clear": "node vendor/batyukovstudio/laravel-static-image/delete.js --config=node_modules/laravel-mix/setup/webpack.config.js",
+  "static-image:clear": "node vendor/batyukovstudio/laravel-static-image/delete.js --config=node_modules/laravel-mix/setup/webpack.config.js"
 }
 ```
-Если вам необходимо отредактировать конфиги, или  изменить static-image.blade:
+
+Если вам необходимо отредактировать конфиги, или изменить static-image.blade:
 
 `php artisan vendor:publish --tag="laravel-static-image"`
-
 
 ## Конфигурация
 
@@ -263,8 +263,8 @@
 <x-static-image src="/batyukovstudio-logotype.png" quality="70"/>
 ```
 
-Не указав значение на теге `x-static-image`, значение качества будет браться из файла конфигурации `batwebp.config.json`, если
-в файле также не указано качество, то будет взято стандартное значение `80`
+Не указав значение на теге `x-static-image`, значение качества будет браться из файла конфигурации `batwebp.config.json`
+, если в файле также не указано качество, то будет взято стандартное значение `80`
 
 ### `lazy`
 
