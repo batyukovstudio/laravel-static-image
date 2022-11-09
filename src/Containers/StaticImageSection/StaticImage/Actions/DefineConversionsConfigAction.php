@@ -4,6 +4,7 @@
 namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Actions;
 
 use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Tasks\CheckConfigDefaultValuesTask;
+use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Tasks\ParseConversionConfigTask;
 use Illuminate\Support\Facades\Cache;
 
 class DefineConversionsConfigAction
@@ -13,7 +14,7 @@ class DefineConversionsConfigAction
     {
         $config = config('laravel-static-image');
 
-        $cacheName = $config['cache.config_name'];
+        $cacheName = $config['cache']['config_name'];
 
         $configData = Cache::get($cacheName);
 
