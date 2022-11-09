@@ -7,6 +7,8 @@ use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageC
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageConversionSizeValue;
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageConversionValue;
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageValue;
+use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Transformers\ImageFormatsTransformer;
+use Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\Transformers\ImageSizesTransformer;
 use Illuminate\View\Component;
 
 class StaticImage extends Component
@@ -58,38 +60,8 @@ class StaticImage extends Component
             ->setAlt($fileName)
             ->setWithGallery(false);
 
-        $conversionsCollection = ImageConversionsCollection::run([]);
-
-        foreach ($formats as $format) {
-
-            $conversionValue = ImageConversionValue::run()
-                ->setIsOriginal(false)
-                ->setMimeType('image/' . $format);
-
-
-            $sizesCollection = ImageConversionSizesCollection::run($sizes);
-
-            foreach ($sizes as $size) {
-
-                $src = $folder . $prefix . $fileName . '_' . $size . '.' . $format;
-                $width = 0;
-
-                if (strpos($size, ':')) {
-                    $src = $folder . $prefix . $fileName . '_' . explode(':', $size)[1] . '.' . $format;
-                    $width = $this->screens[explode(':', $size)[0]];
-                }
-
-                $sizeValue = ImageConversionSizeValue::run()
-                    ->setSrc($src)
-                    ->setHeight(null)
-                    ->setWidth($width);
-
-                $sizesCollection->push($sizeValue);
-            }
-
-            $conversionValue->setImageConversionSizesCollection($sizesCollection);
-            $conversionsCollection->push($conversionValue);
-        }
+        $transformer = new ImageFormatsTransformer($sizes,$prefix, $folder, $fileName);
+        $conversionsCollection = ImageConversionsCollection::run($formats, $transformer);
 
         $imageValue->setImageConversionsCollection($conversionsCollection);
 
