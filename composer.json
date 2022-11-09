@@ -14,7 +14,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Batyukovstudio\\LaravelStatucImage\\PasswordServiceProvider"
+        "Batyukovstudio\\LaravelStaticImage\\LaravelStaticImageServiceProvider"
       ]
     }
   },
