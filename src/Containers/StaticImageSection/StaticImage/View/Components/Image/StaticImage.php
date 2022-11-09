@@ -2,6 +2,7 @@
 
 namespace Batyukovstudio\LaravelStaticImage\Containers\StaticImageSection\StaticImage\View\Components\Image;
 
+use App\Models\Users\User;
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageConversionsCollection;
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageConversionSizesCollection;
 use BatyukovStudio\LaravelImageObject\Containers\ImageSection\Image\Value\ImageConversionSizeValue;
@@ -37,9 +38,12 @@ class StaticImage extends Component
      * @param string $sizes
      * @return array
      */
-    private function prepareSizes(string $sizes): array
+    private function prepareSizes(string|array $sizes): array
     {
-        $sizesArray = explode(' ', $sizes);
+        if (is_string($sizes)) {
+            $sizesArray = explode(' ', $sizes);
+        }
+
         return $sizesArray;
     }
 
@@ -48,14 +52,15 @@ class StaticImage extends Component
         $prefix = laravel_static_image()->getPrefix();
         $formats = laravel_static_image()->getFormats();
 
-        $imageValue = ImageValue::run()
-            ->setAlt($fileName)
-            ->setWithGallery(false);
 
         $transformer = new ImageFormatsTransformer($sizes, $prefix, $folder, $fileName);
         $conversionsCollection = ImageConversionsCollection::run($formats, $transformer);
 
-        $imageValue->setImageConversionsCollection($conversionsCollection);
+
+        $imageValue = ImageValue::run()
+            ->setAlt($this->alt)
+            ->setImageConversionsCollection($conversionsCollection);
+
 
         return $imageValue;
     }
@@ -70,11 +75,10 @@ class StaticImage extends Component
 
         $sizes = $this->sizes ?? laravel_static_image()->getScreens();
 
-        if (is_string($sizes)) {
-            $sizes = $this->prepareSizes($sizes);
-        }
+        $sizes = $this->prepareSizes($sizes);
 
-        $fileName = basename($src);
+        $fileName = pathinfo($src, PATHINFO_FILENAME);
+
         $folder = dirname($src) . '/';
 
         $image = $this->prepareValue($sizes, $fileName, $folder);

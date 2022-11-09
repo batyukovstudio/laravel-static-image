@@ -24,7 +24,6 @@ class ImageSizesTransformer extends Transformer
 
         $src = $this->folder . $this->prefix . $this->filename . '_' . $size . '.' . $this->format;
         $width = 0;
-
         if (strpos($size, ':')) {
 
             $explodedSize = explode(':', $size);

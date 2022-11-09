@@ -23,7 +23,9 @@ class LaravelStaticImageServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/Containers/StaticImageSection/StaticImage/Config/staticImageSection-staticImage.php' => config_path('laravel-static-image.php'),
-            __DIR__ . '/resources/components/static-image.blade.php' => resource_path('components/image.blade.php')
+            __DIR__ . '/resources/components/static-image.blade.php' => resource_path('components/image.blade.php'),
+            __DIR__ . '/../conversion-config.json' => base_path('conversion-config.json'),
+
         ], 'laravel-static-image');
 
         $this->mergeConfigFrom(__DIR__ . '/Containers/StaticImageSection/StaticImage/Config/staticImageSection-staticImage.php', 'laravel-static-image');

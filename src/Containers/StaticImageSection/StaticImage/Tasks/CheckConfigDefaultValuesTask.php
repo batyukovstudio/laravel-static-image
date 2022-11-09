@@ -25,7 +25,7 @@ class CheckConfigDefaultValuesTask
      * @param array $config
      * @param string $defaultAttributeName
      */
-    private function defineDefault(array &$config, string $defaultAttributeName):void
+    private function defineDefault(array &$config, string $defaultAttributeName): void
     {
         if (!isset($config[$defaultAttributeName])) {
             $config[$defaultAttributeName] = config('laravel-static-image.default.' . $defaultAttributeName);

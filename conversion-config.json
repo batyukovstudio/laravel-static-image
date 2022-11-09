@@ -8,10 +8,10 @@
         "xxl": 1536
     },
     "quality": 80,
-    "format": ["avif", "webp"],
-    "prefix": "_ebs_",
-    "pageFolder": ["src"],
-    "sourceFolder": "src",
+    "format": [ "webp"],
+    "prefix": "conversion_",
+    "pageFolder": ["resources"],
+    "sourceFolder": "public",
     "searchExcludes": ["node_modules"],
     "checkWarning": false,
     "checkProgress": false

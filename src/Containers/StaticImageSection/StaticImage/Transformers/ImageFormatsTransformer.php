@@ -26,15 +26,16 @@ class ImageFormatsTransformer extends Transformer
     public function transform(mixed $format): ImageConversionValue
     {
 
+        $transformer = new ImageSizesTransformer($this->prefix, $this->folder, $format, $this->filename);
+
+        $sizesCollection = ImageConversionSizesCollection::run($this->sizes, $transformer);
+        $sizesCollection = $sizesCollection->sortByDesc('width');
+        
+        
         $conversionValue = ImageConversionValue::run()
             ->setIsOriginal(false)
-            ->setMimeType('image/' . $format);
-
-
-        $transformer = new ImageSizesTransformer($this->prefix, $this->folder, $format, $this->filename);
-        $sizesCollection = ImageConversionSizesCollection::run($this->sizes, $transformer);
-
-        $conversionValue->setImageConversionSizesCollection($sizesCollection);
+            ->setMimeType('image/' . $format)
+            ->setImageConversionSizesCollection($sizesCollection);
 
         return $conversionValue;
     }
