@@ -54,6 +54,10 @@ class ImageFormatsTransformer extends Transformer
      */
     private function prepareSizesCollection(string $format): ImageConversionSizesCollection
     {
+        if(count($this->sizes) === 0){
+            $this->sizes[] = null;
+        }
+
         $transformer = new ImageSizesTransformer($this->prefix, $this->folder, $format, $this->filename, $this->mainWidth);
 
         $sizesCollection = ImageConversionSizesCollection::run($this->sizes, $transformer);
