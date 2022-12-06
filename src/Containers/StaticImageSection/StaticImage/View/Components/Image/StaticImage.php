@@ -41,10 +41,10 @@ class StaticImage extends Component
     private function prepareSizes(string|array $sizes): array
     {
         if (is_string($sizes)) {
-            $sizesArray = explode(' ', $sizes);
+            $sizes = explode(' ', $sizes);
         }
 
-        return $sizesArray;
+        return $sizes;
     }
 
     private function prepareValue(array $sizes, string $fileName, string $folder): ImageValue
@@ -53,7 +53,7 @@ class StaticImage extends Component
         $formats = laravel_static_image()->getFormats();
 
 
-        $transformer = new ImageFormatsTransformer($sizes, $prefix, $folder, $fileName);
+        $transformer = new ImageFormatsTransformer($sizes, $prefix, $folder, $fileName,$this->width);
         $conversionsCollection = ImageConversionsCollection::run($formats, $transformer);
 
 
@@ -73,7 +73,7 @@ class StaticImage extends Component
     {
         $src = $this->src;
 
-        $sizes = $this->sizes ?? laravel_static_image()->getScreens();
+        $sizes = $this->sizes ?? [];
 
         $sizes = $this->prepareSizes($sizes);
 
